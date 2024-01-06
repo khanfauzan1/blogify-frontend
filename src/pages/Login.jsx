@@ -10,7 +10,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
-  const { setUser } = useContext(UserContext);
+  
   const navigate = useNavigate();
   const handleLogin = async () => {
     try {
@@ -20,6 +20,10 @@ const Login = () => {
         { withCredentials: true }
       );
       console.log("login successful");
+       window.localStorage.setItem('user', true)
+      window.localStorage.setItem('userId', res.data._id)
+      window.localStorage.setItem('username', res.data.username)
+    
       setUser(res.data);
       setError(false);
       navigate("/");
