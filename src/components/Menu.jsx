@@ -4,8 +4,8 @@ import axios from "axios";
 const URL=import.meta.env.VITE_SERVER_URL
 import { Link, useNavigate } from "react-router-dom";
 const Menu = () => {
-  const { user } = useContext(UserContext);
-  const { setUser } = useContext(UserContext);
+    const user=window.localStorage.getItem('user')
+  const userId=window.localStorage.getItem('userId')
   const navigate = useNavigate();
   const handleLogout = async () => {
     try {
@@ -13,8 +13,9 @@ const Menu = () => {
         withCredentials: true,
       });
       // console.log(res);
+       
       navigate("/login");
-      setUser(null);
+       window.localStorage.removeItem('user')
     } catch (err) {
       console.log(err);
     }
@@ -33,7 +34,7 @@ const Menu = () => {
       )}
       {user && (
         <h3 className="text-white text-sm hover:text-gray-500 cursor-pointer">
-          <Link to={"/profile/" + user._id}>Profile</Link>
+          <Link to={"/profile/" + userId}>Profile</Link>
         </h3>
       )}
       {user && (
@@ -43,7 +44,7 @@ const Menu = () => {
       )}
       {user && (
         <h3 className="text-white text-sm hover:text-gray-500 cursor-pointer">
-          <Link to={"/myblogs/" + user._id}>My Blogs</Link>
+          <Link to={"/myblogs/" + userId}>My Blogs</Link>
         </h3>
       )}
       {user && (
