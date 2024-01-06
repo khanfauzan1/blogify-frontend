@@ -14,7 +14,8 @@ const PostDetails = () => {
   const postId = useParams().id;
   const [post, setPost] = useState({});
   const navigate = useNavigate();
-  const { user } = useContext(UserContext);
+  const user=window.localStorage.getItem('user')
+  const userId=window.localStorage.getItem('userId')
   const [loader, setLoader] = useState(false);
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
@@ -62,9 +63,9 @@ const PostDetails = () => {
         URL + "/api/comments/create",
         {
           comment: comment,
-          author: user.username,
+          author: username,
           postId: postId,
-          userId: user._id,
+          userId: userId,
         },
         { withCredentials: true }
       );
