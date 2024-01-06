@@ -10,7 +10,9 @@ const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [photo, setPhoto] = useState("");
-  const { user } = useContext(UserContext);
+ const user=window.localStorage.getItem('user')
+  const userId=window.localStorage.getItem('userId')
+  const username=window.localStorage.getItem('username')
   const [cat, setCat] = useState("");
   const [cats, setCats] = useState([]);
   const navigate = useNavigate();
@@ -32,9 +34,9 @@ const CreatePost = () => {
       title,
       desc,
       photo,
-      username: user.username,
+      username: username,
       categories: cats,
-      userId: user._id,
+      userId: userId,
     };
     // if (file) {
     //   const data = new FormData();
