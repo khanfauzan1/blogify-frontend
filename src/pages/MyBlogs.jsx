@@ -14,11 +14,12 @@ const MyBlogs = () => {
   const [posts, setPosts] = useState([]);
   const [noresults, setNoResults] = useState(false);
   const [loader, setLoader] = useState(false);
-  const { user } = useContext(UserContext);
+   const user=window.localStorage.getItem('user')
+  const userId=window.localStorage.getItem('userId')
   const fetchPosts = async () => {
     setLoader(true);
     try {
-      const res = await axios.get(URL + "/api/posts/user/" + user._id);
+      const res = await axios.get(URL + "/api/posts/user/" + userId);
       setPosts(res.data);
       if (res.data.length === 0) setNoResults(true);
       else setNoResults(false);
