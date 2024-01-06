@@ -14,7 +14,7 @@ const Home = () => {
   const [posts, setPosts] = useState([]);
   const [noresults, setNoResults] = useState(false);
   const [loader, setLoader] = useState(false);
-  const { user } = useContext(UserContext);
+  const user=window.localStorage.getItem('user')
   const fetchPosts = async () => {
     setLoader(true);
     try {
