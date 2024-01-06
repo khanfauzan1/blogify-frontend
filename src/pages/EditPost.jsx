@@ -9,7 +9,9 @@ import { UserContext } from "../context/UserContext";
 
 const EditPost = () => {
   const postId = useParams().id;
-  const { user } = useContext(UserContext);
+   const user=window.localStorage.getItem('user')
+  const userId=window.localStorage.getItem('userId')
+  const username=window.localStorage.getItem('username')
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
@@ -34,9 +36,9 @@ const EditPost = () => {
       title,
       desc,
       photo,
-      username: user.username,
+      username: username,
       categories: cats,
-      userId: user._id,
+      userId: userId,
     };
     // if (file) {
     //   const data = new FormData();
