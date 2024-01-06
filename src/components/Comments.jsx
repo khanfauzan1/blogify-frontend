@@ -6,7 +6,8 @@ import { UserContext } from "../context/UserContext";
 import { URL } from "../url";
 
 const Comments = ({ c, post }) => {
-  const { user } = useContext(UserContext);
+  const user=window.localStorage.getItem('user')
+  const userId=window.localStorage.getItem('userId')
   const deleteComment = async (id) => {
     try {
       await axios.delete(URL + "/api/comments/" + id, {
@@ -25,7 +26,7 @@ const Comments = ({ c, post }) => {
         <div className="flex justify-center items-center space-x-4">
           <p>{new Date(c.updatedAt).toString().slice(0, 15)}</p>
           <p>{new Date(c.updatedAt).toString().slice(16, 24)}</p>
-          {user?._id === c?.userId ? (
+          {userId === c?.userId ? (
             <div className="flex items-center justify-center space-x-2">
               {/* <p>
               <BiEdit />
