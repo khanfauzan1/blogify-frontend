@@ -13,12 +13,13 @@ const Profile = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [updated, setUpdated] = useState(false);
-  const { user, setUser } = useContext(UserContext);
+  const user=window.localStorage.getItem('user')
+  const userId=window.localStorage.getItem('userId')
   const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
   const fetchProfile = async () => {
     try {
-      const res = await axios.get(URL + "/api/users/" + user._id);
+      const res = await axios.get(URL + "/api/users/" + userId);
       console.log(res.data);
       setUsername(res.data.username);
       setEmail(res.data.email);
@@ -32,7 +33,7 @@ const Profile = () => {
     setUpdated(false);
     try {
       const res = await axios.put(
-        URL + "/api/users/" + user._id,
+        URL + "/api/users/" + userId,
         { username, email, password },
         { withCredentials: true }
       );
@@ -44,10 +45,10 @@ const Profile = () => {
   };
   const handleUserDelete = async () => {
     try {
-      const res = await axios.delete(URL + "/api/users/" + user._id, {
+      const res = await axios.delete(URL + "/api/users/" + userId, {
         withCredentials: true,
       });
-      setUser(null);
+      window.localStorage.removeItem("user")
       navigate("/");
     } catch (err) {
       console.log(err);
@@ -56,7 +57,7 @@ const Profile = () => {
 
   const fetchUserPosts = async () => {
     try {
-      const res = await axios.get(URL + "/api/posts/user/" + user._id);
+      const res = await axios.get(URL + "/api/posts/user/" + userId);
       console.log(res.data);
       setPosts(res.data);
     } catch (err) {
