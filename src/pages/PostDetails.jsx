@@ -16,6 +16,7 @@ const PostDetails = () => {
   const navigate = useNavigate();
   const user=window.localStorage.getItem('user')
   const userId=window.localStorage.getItem('userId')
+  const username=window.localStorage.getItem('username')
   const [loader, setLoader] = useState(false);
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
@@ -92,7 +93,7 @@ const PostDetails = () => {
               {post.title}
             </h1>
 
-            {user?._id === post?.userId && (
+            {userId === post?.userId && (
               <div className="flex items-center justify-center space-x-2">
                 <p>
                   <BiEdit
